@@ -38,6 +38,7 @@ public class MainController {
     public String pageForReadProfile(){
         return "read profile Page" ;
     }
+
     @GetMapping("/only_admins")
     public String pageForOnlyAdmins(){
         return "admins Page" ;
