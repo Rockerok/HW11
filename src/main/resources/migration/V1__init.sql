@@ -23,13 +23,21 @@ CREATE TABLE users_roles
     foreign key (role_id) references roles (id)
 );
 
+--Добавлена сущность Админа
 insert into roles (name)
 values ('ROLE_USER'),
-       ('ROLE_ADMIN');
+       ('ROLE_ADMIN'),
+       ('ADMIN');
 
 insert into users (username, password, email)
 values ('user', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'user@gmail.com');
+insert into users (username, password, email)
+values ('admin', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', 'admin@gmail.com');
 
+--Добавлены права на Дамина
 insert into users_roles (user_id, role_id)
-values (1, 1) ;
+values (1, 1),
+(2,1),
+(2,2),
+(2,3);
 

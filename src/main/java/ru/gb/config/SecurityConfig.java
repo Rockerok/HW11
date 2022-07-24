@@ -26,53 +26,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
                 .antMatchers("/authenticated/**").authenticated()
-                .antMatchers("/only_admins/**").hasAnyAuthority("ADMIN","SUPERADMIN")
-                .antMatchers("/profile/**").authenticated()
+                .antMatchers("/only_admins/**").hasAuthority("ADMIN")
+                .antMatchers("/profile/**").hasAuthority("ADMIN")
                 .and()
                 .formLogin()
                 .and()
                 .logout().logoutSuccessUrl("/");
-
     }
-
-//    @Bean
-//    public UserDetailsService users(){
-//        UserDetails user = User.builder()
-//                .username("user")
-//                .password ("{bcrypt}$2a$12$syyW0fkLI./uimpJxQznWumuLw1lCk8PEIZBFabblFhH0skiUcxE.")
-//                .roles("USER")
-//                .build();
-//        UserDetails admin = User.builder()
-//                .username("admin")
-//                .password ("{bcrypt}$2a$12$syyW0fkLI./uimpJxQznWumuLw1lCk8PEIZBFabblFhH0skiUcxE.")
-//                .roles("ADMIN","USER")
-//                .build();
-//        return new InMemoryUserDetailsManager(user,admin);
-//    }
-
-//    @Bean
-//    public JdbcUserDetailsManager users(DataSource dataSource) {
-//        UserDetails user = User.builder()
-//                .username("user")
-//                .password ("{bcrypt}$2a$12$syyW0fkLI./uimpJxQznWumuLw1lCk8PEIZBFabblFhH0skiUcxE.")
-//                .authorities ("USER")
-//                .build();
-//        UserDetails admin = User.builder()
-//                .username("admin")
-//                .password ("{bcrypt}$2a$12$syyW0fkLI./uimpJxQznWumuLw1lCk8PEIZBFabblFhH0skiUcxE.")
-//                .authorities ("ADMIN")
-//                .build();
-//        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
-//        if (jdbcUserDetailsManager.userExists(user.getUsername())){
-//            jdbcUserDetailsManager.deleteUser(user.getUsername());
-//        }
-//        if (jdbcUserDetailsManager.userExists(admin.getUsername())) {
-//            jdbcUserDetailsManager.deleteUser(admin.getUsername());
-//        }
-//        jdbcUserDetailsManager.createUser(user);
-//        jdbcUserDetailsManager.createUser(admin);
-//        return jdbcUserDetailsManager;
-//    }
 
     @Bean
     public PasswordEncoder passwordEncoder(){
